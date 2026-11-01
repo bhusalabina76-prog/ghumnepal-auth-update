@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+.planner-page { --planner-green:#277a52; --planner-ink:#18372f; max-width:1200px; min-height:100vh; margin:auto; padding:30px 6% 80px; color:var(--planner-ink); font-family:'DM Sans',sans-serif; }
+.planner-back { display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--planner-ink); font-size:14px; font-weight:700; }
+.planner-heading { margin:58px 0 34px; max-width:720px; }
+.planner-heading > span,.planner-estimate-label { color:var(--planner-green); font-size:11px; font-weight:800; letter-spacing:1.6px; }
+.planner-heading h1 { font:800 clamp(36px,6vw,60px)/1.12 'Manrope',sans-serif; letter-spacing:-2px; margin:13px 0; }
+.planner-heading p { color:#718078; font-size:16px; line-height:1.8; }
+.planner-layout { display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:32px; align-items:start; }
+.planner-form { padding:28px; border:1px solid #e3eae5; border-radius:15px; display:grid; gap:23px; }
+.planner-form label { display:grid; gap:10px; font-size:14px; font-weight:700; }
+.planner-form label span { display:flex; align-items:center; gap:8px; }
+.planner-form label svg { color:var(--planner-green); }
+.planner-form input,.planner-form select { width:100%; padding:13px 14px; border:1px solid #dbe4dd; border-radius:8px; background:white; color:#263d32; font:inherit; outline-color:#7ab393; }
+.planner-estimate { padding:27px; border-radius:15px; background:#f2f7f3; }
+.planner-estimate h2 { font:800 35px 'Manrope',sans-serif; margin:14px 0; letter-spacing:-1px; }
+.planner-estimate > p { color:#718078; font-size:14px; line-height:1.7; }
+.planner-estimate-line { display:flex; justify-content:space-between; gap:12px; border-top:1px solid #dfe9e1; padding:13px 0; font-size:13px; }
+.planner-estimate-line span { color:#718078; }
+.planner-estimate-warning { padding:13px; border-radius:8px; background:#fffdf4; color:#736b4e; font-size:12px; line-height:1.7; margin:8px 0; }
+.planner-destination-link { display:flex; justify-content:space-between; align-items:center; color:var(--planner-green); font-size:13px; font-weight:700; text-decoration:none; margin-top:18px; }
+.planner-destination-link svg { transform:rotate(180deg); }
+@media(max-width:800px){.planner-layout{grid-template-columns:1fr}.planner-heading{margin-top:38px}}
+@media(max-width:520px){.planner-page{padding:20px 5% 50px}.planner-form,.planner-estimate{padding:20px}.planner-heading h1{letter-spacing:-1px}}

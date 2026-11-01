@@ -70,3 +70,13 @@
   .destination-page-top { align-items: flex-start; flex-direction: column; }
   .destination-hero h1 { letter-spacing: -1px; }
 }
+
+.destination-hero > img { animation: destinationImageIn .9s ease-out both; transition:transform 1s ease; }
+.destination-hero:hover > img { transform:scale(1.025); }
+.destination-hero-content { animation: destinationTextIn .7s .12s both; }
+.destination-facts > div,.destination-highlights > div,.destination-itinerary article { transition:transform .22s,background .22s,border-color .22s; }
+.destination-facts > div:hover { transform:translateY(-4px); border-color:#b8d4bc; background:#fbfdfb; }
+.destination-highlights > div:hover { transform:translateX(4px); }
+@keyframes destinationImageIn { from { transform:scale(1.04);opacity:.8; } to { transform:scale(1);opacity:1; } }
+@keyframes destinationTextIn { from { opacity:0;transform:translateY(14px); } to { opacity:1;transform:translateY(0); } }
+@media(prefers-reduced-motion:reduce) { .destination-hero > img,.destination-hero-content { animation:none;transition:none; } }

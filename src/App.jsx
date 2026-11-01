@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { readCatalogue, wishlistKey } from './phase6Data.js';
 import {
   Search,
@@ -35,6 +35,7 @@ import ProfilePage from './pages/ProfilePage.jsx';
 import BookingPage, { MyTripsPage } from './pages/BookingPage.jsx';
 import AdminPage from './pages/AdminPage.jsx';
 import AdminLoginPage from './pages/AdminLoginPage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
 import './App.css';
 
 const starterDestinations = [
@@ -76,6 +77,12 @@ const starterDestinations = [
   },
 ];
 
+const heroSlides = [
+  { image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2200&q=90', caption: 'The Himalayas, Nepal' },
+  { image: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=2200&q=90', caption: 'Peaceful lakes of Pokhara' },
+  { image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2200&q=90', caption: 'Find your mountain escape' },
+];
+
 const categories = [
   { name: 'Destinations', icon: Compass, description: 'Discover places' },
   { name: 'Hotels & Stays', icon: Hotel, description: 'Find your stay' },
@@ -85,6 +92,8 @@ const categories = [
 
 function Home() {
   const [search, setSearch] = useState('');
+  const [heroSlide, setHeroSlide] = useState(0);
+  useEffect(() => { const timer = window.setInterval(() => setHeroSlide((current) => (current + 1) % heroSlides.length), 5000); return () => window.clearInterval(timer); }, []);
   const [destinations] = useState(() => readCatalogue(starterDestinations));
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -170,6 +179,7 @@ function Home() {
           >
             About us
           </a>
+          <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact us</Link>
         </nav>
 
         <div className="nav-actions">
@@ -190,7 +200,7 @@ function Home() {
 
       <main>
         <section className="hero" id="home">
-          <div className="hero-background" />
+          <div className="hero-background" style={{ backgroundImage: `linear-gradient(90deg, rgba(12,38,29,.85) 0%, rgba(12,38,29,.63) 39%, rgba(12,38,29,.13) 100%), linear-gradient(0deg, rgba(10,34,26,.24), transparent 45%), url("${heroSlides[heroSlide].image}")` }} />
 
           <div className="hero-content">
             <div className="hero-eyebrow">
@@ -528,22 +538,19 @@ function Home() {
       </main>
 
       <footer className="footer" id="about">
-        <a className="brand footer-brand" href="#home">
-          <span className="brand-icon">
-            <Mountain size={25} />
-          </span>
-
-          <span>
-            ghum<span className="brand-green">nepal</span>
-            <small>YOUR JOURNEY, YOUR NEPAL</small>
-          </span>
-        </a>
-
-        <p>Discover more. Travel deeper. Love Nepal.</p>
-
-        <span className="footer-copy">
-          © {new Date().getFullYear()} GhumNepal. Made with love for Nepal.
-        </span>
+        <div className="footer-main">
+          <div className="footer-about">
+            <a className="brand footer-brand" href="#home">
+              <span className="brand-icon"><Mountain size={25} /></span>
+              <span>ghum<span className="brand-green">nepal</span><small>YOUR JOURNEY, YOUR NEPAL</small></span>
+            </a>
+            <p>Discover more. Travel deeper. Love Nepal. Find your next story across the mountains, cities, lakes and living cultures of Nepal.</p>
+          </div>
+          <div className="footer-links"><h3>Explore</h3><a href="#destinations">Destinations</a><a href="/map">Explore map</a><a href="/planner">Trip planner</a><a href="/wishlist">Saved places</a></div>
+          <div className="footer-links"><h3>Plan your trip</h3><a href="/book">Book a trip</a><a href="/my-trips">My trips</a><a href="/login">Sign in</a><Link to="/contact">Contact us</Link></div>
+          <div className="footer-contact"><h3>Let’s talk</h3><p>Questions about your next Nepal adventure? We’d love to hear from you.</p><Link to="/contact" className="footer-contact-button">Get in touch <ArrowRight size={16} /></Link><a href="mailto:hello@ghumnepal.com.np">hello@ghumnepal.com.np</a></div>
+        </div>
+        <div className="footer-bottom"><span>© {new Date().getFullYear()} GhumNepal. Made with love for Nepal.</span><span>Travel thoughtfully. Leave only good footprints.</span></div>
       </footer>
     </div>
   );
@@ -558,7 +565,7 @@ function ProtectedAdminRoute() {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Home />} />\n      <Route path="/contact" element={<ContactPage />} />
       <Route
         path="/destinations/:slug"
         element={<DestinationPage />}
